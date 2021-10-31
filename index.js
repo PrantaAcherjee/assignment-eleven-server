@@ -17,6 +17,7 @@ await client.connect();
 console.log('database connected sucessfully')
 const database=client.db('travelsFreak');
 const servicesCollection=database.collection('services');
+const orderCollection=database.collection('orders')
 // Get Api 
 app.get('/services',async (req,res)=>{
     const cursor=servicesCollection.find({});
@@ -47,6 +48,12 @@ app.delete('/services/:id',async(req,res)=>{
     const query={_id:ObjectId(id)};
     const result=await servicesCollection.deleteOne(query);
     res.json(result);
+})
+// Add orders Api
+app.post('/orders',async(req,res)=>{
+    const order=req.body;
+    const result=await orderCollection.insertOne(order);
+    res.json(result)
 })
 
 }
