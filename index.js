@@ -1,3 +1,4 @@
+// make public
 const express=require('express');
 const { MongoClient } = require('mongodb');
 const ObjectId=require('mongodb').ObjectId;
@@ -29,7 +30,6 @@ app.get('/services',async (req,res)=>{
 app.get('/services/:id',async(req,res)=>{
     const id=req.params.id;
     const query={_id:ObjectId(id)};
-
     const service=await servicesCollection.findOne(query)
     res.json(service);
 })
